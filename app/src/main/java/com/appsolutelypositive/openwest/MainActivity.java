@@ -4,11 +4,15 @@ import android.databinding.DataBindingUtil;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 
 import com.appsolutelypositive.openwest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    //Here we import all of our variables that we'll be using, just like any other piece of software.
     private ActivityMainBinding binding;
     private double valueOne = Double.NaN;
     private double valueTwo;
@@ -23,11 +27,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //This ensures that we can use doubles and still have more than just
+        //int values in the answer field.
         decimalFormat = new DecimalFormat("#.###");
 
+        //This imports the DataBindingUtil object, which presents the Java data in the View
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         //Button Bindings
+        //These binding make it so when the button is clicked, the app "hears" the click
+        //request and completes the action by giving a String response, in this case, it's
+        //the number on the button that we set up.
 
         binding.sevenBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Compute Calc Bindings
+        //These are slightly different data bindings that will occur in conjuction
+        //with the computation
 
         binding.plusBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -202,23 +213,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void computeCalc() {
-        if(!Double.isNaN(valueOne)) {
+        if (!Double.isNaN(valueOne)) {
             valueTwo = Double.parseDouble(binding.editText.getText().toString());
-            binding.editText.setText(null);
-            if(CURRENT_ACTION == ADDITION)
-                valueOne = this.valueOne + valueTwo;
-            else if(CURRENT_ACTION == SUBTRACTION)
-                valueOne = this.valueOne - valueTwo;
-            else if(CURRENT_ACTION == MULTIPLICATION)
-                valueOne = this.valueOne * valueTwo;
-            else if(CURRENT_ACTION == DIVISION)
-                valueOne = this.valueOne / valueTwo;
-        }
-        else {
-            try {
-                valueOne = Double.parseDouble(binding.editText.getText().toString());
+            String textString = binding.editText.getText().toString();
+            if(textString.matches("")){
+                Log.e("no data", "x no x data x");
+                return;
             }
-            catch (Exception e){}
+                binding.editText.setText(null);
+                if (CURRENT_ACTION == ADDITION)
+                    valueOne = this.valueOne + valueTwo;
+                else if (CURRENT_ACTION == SUBTRACTION)
+                    valueOne = this.valueOne - valueTwo;
+                else if (CURRENT_ACTION == MULTIPLICATION)
+                    valueOne = this.valueOne * valueTwo;
+                else if (CURRENT_ACTION == DIVISION)
+                    valueOne = this.valueOne / valueTwo;
+
+            } else {
+                try {
+                    valueOne = Double.parseDouble(binding.editText.getText().toString());
+                } catch (Exception e) {}
+            }
         }
-    }
 }
