@@ -12,7 +12,7 @@ import com.appsolutelypositive.openwest.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Here we import all of our variables that we'll be using, just like any other piece of software.
+    //Here we import all of our variables that we'll be using, just like any other piece of software .
     private ActivityMainBinding binding;
     private double valueOne = Double.NaN;
     private double valueTwo;
