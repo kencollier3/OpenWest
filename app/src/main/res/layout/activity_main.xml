@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+        <variable
+            name="operand"
+            type="String"/>
+        <variable
+            name="previous"
+            type="String"/>
+        <variable
+            name="result"
+            type="String"/>
+        <variable
+            name="pendingOperation"
+            type="com.appsolutelypositive.openwest.Operation"/>
+        <variable
+            name="currentLine"
+            type="CharSequence"/>
+    </data>
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/activity_main"
@@ -9,30 +27,31 @@
         tools:context="com.appsolutelypositive.openwest.MainActivity">
 
         <TextView
-            android:id="@+id/infoTextView"
+            android:id="@+id/lastOperation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:textSize="45sp" />
+            android:layout_marginBottom="8dp"
+            android:textSize="32sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/currentOperation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/infoTextView"
+            android:layout_below="@id/lastOperation"
             android:enabled="false"
             android:gravity="bottom"
-            android:lines="2"
-            android:maxLines="2"
+            android:lines="1"
+            android:maxLines="1"
             android:textSize="20sp"
-            android:layout_marginBottom="32dp"/>
+            android:text="@{currentLine}"
+            android:layout_marginBottom="16dp"/>
 
         <Button
             android:id="@+id/sevenBtn"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_below="@id/editText"
+            android:layout_below="@id/currentOperation"
             android:layout_marginLeft="48dp"
             android:text="7"
             android:textSize="20sp" />
@@ -42,7 +61,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_below="@id/editText"
+            android:layout_below="@id/currentOperation"
             android:layout_toRightOf="@+id/sevenBtn"
             android:text="8"
             android:textSize="20sp" />
@@ -52,7 +71,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_below="@id/editText"
+            android:layout_below="@id/currentOperation"
             android:layout_toRightOf="@+id/eightBtn"
             android:text="9"
             android:textSize="20sp" />
@@ -62,7 +81,7 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_below="@id/editText"
+            android:layout_below="@id/currentOperation"
             android:layout_toRightOf="@+id/nineBtn"
             android:text="/"
             android:textSize="20sp" />
